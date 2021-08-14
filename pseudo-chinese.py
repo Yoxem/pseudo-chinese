@@ -1,3 +1,4 @@
+import functools
 import MeCab
 import sys
 import re
@@ -27,6 +28,24 @@ def parse(sentence):
 		result.append(item)
 	return result
 
+
+def is_hira(string):
+	if isinstance(string, str):
+		string = list(string)
+	if len(string) == 0:
+		return False
+	elif len(string) == 1:
+		return (("ぁ" <= string[0]) and (string[0] <= "ん"))
+	if len(string) > 1:
+		return functools.reduce((lambda x, y: (is_hira(x) and is_hira(y))) , string)
+
+def contain_kanji(str):
+	if len(str) == 0:
+		return False
+	elif len(str) == 1:
+		return re.match(r"[一-龯]", str)
+	if len(str) > 1:
+		return functools.reduce(lambda x, y: contain_kanji(x) or contain_kanji(y) , str)	
 
 
 # ひらがなを削除する関数
@@ -64,10 +83,18 @@ if __name__ == "__main__":
 				elif token['lemma'] == 'た':
 					prime = "了"
 				else:
-					prime = token["lemma"]
+					print(is_hira(token['lemma']))
+					if is_hira(token['lemma']):
+						
+						prime = token["form"]
+					else:
+						prime = token["lemma"]
 			else:
-				prime = token["lemma"]
 
+				if is_hira(token["lemma"]) and contain_kanji(token["form"]):
+					prime=token["form"]
+				else:
+					prime = token["lemma"]
 
 
 			if (token['lemma'] == '君' or token['lemma'] == '貴方' or token['lemma'] == 'お前'):
@@ -90,6 +117,9 @@ if __name__ == "__main__":
 						prime = "無之"
 					else:
 						prime = prime + "之"
+			
+			
+
 
 			result_list.append(hira_to_blank(prime))
 
