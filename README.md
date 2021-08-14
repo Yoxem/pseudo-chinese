@@ -4,7 +4,7 @@ Convert Japanese to pseudo-Chinese.
 ## Description
 This tool will automatically generate fake Chinese from Japanese sentences.
 
-Using MeCab to parse Japanese sentences instead of COTOHA API.
+Using MeCab to parse and word-tag Japanese sentences instead of COTOHA API.
 
 ## Demo
 私は本日定時退社します -> 我本日定時退社為
