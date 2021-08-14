@@ -1,5 +1,6 @@
 import MeCab
 import sys
+import re
 
 
 # 形態素解析する関数
@@ -46,7 +47,8 @@ if __name__ == "__main__":
 	#print(parse_document)
 	result_list = list()
 	
-	for token in parse_document:
+	for i, token in enumerate(parse_document):
+
 		# 形態素解析結果に置き換えルールを適用する
 		if (token["pos"] != "助詞-格助詞" 
 			and token["pos"] != "助詞-接続助詞" 
@@ -73,16 +75,20 @@ if __name__ == "__main__":
 			if (token['lemma'] == '君' or token['lemma'] == '貴方' or token['lemma'] == 'お前'):
 				prime = '你'
 
+			if token['lemma'] == '為る' and parse_document[i-1]['pos'] == '名詞-普通名詞-サ変可能':
+				prime = ''
 
-			if token['lemma'] == '円-助数詞':
-				prime = '円'
+
+			compound_matched = re.match("([^-]+)-([^-]+)", token['lemma'])
+			if compound_matched:
+				prime = compound_matched.group(1)
 
 			if len(token["features"]) != 0:
 				if "連体形-一般" in token['features']:
 					if token['lemma'] == 'ない':
 						prime = "無之"
 					else:
-						prime = "之"
+						prime = prime + "之"
 
 			result_list.append(hira_to_blank(prime))
 
