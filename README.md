@@ -34,5 +34,5 @@ MIT
 
 ## Author
 
-[Shoichiro Kono](https://github.com/k2font) (orig. creater)
-[Tan Kian-ting](https://github.com/yoxem) (porting to MeCab, and modified it.)
+- [Shoichiro Kono](https://github.com/k2font) (orig. creater)
+- [Tan Kian-ting](https://github.com/yoxem) (porting to MeCab, and modified it.)
