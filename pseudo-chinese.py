@@ -13,7 +13,7 @@ def parse(sentence):
 		j = i.split('\t')
 		item = dict()
 		item['form'] = j[0] # 食べ
-		print(j)
+		#print(j)
 		if len(j) > 1:
 			item['lemma'] = j[3] # 食べる
 			item['pos'] = j[4] #　動詞-一般
