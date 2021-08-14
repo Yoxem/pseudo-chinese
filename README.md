@@ -7,7 +7,7 @@ This tool will automatically generate fake Chinese from Japanese sentences.
 Using MeCab to parse and word-tag Japanese sentences instead of COTOHA API.
 
 ## Demo
-私は本日定時退社します -> 我本日定時退社為
+私は本日定時退社します -> 我本日定時退社
 
 私はお酒を飲みたい -> 我御酒飲欲
 

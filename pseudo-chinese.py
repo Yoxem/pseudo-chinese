@@ -69,8 +69,6 @@ if __name__ == "__main__":
 				prime = token["lemma"]
 
 
-			if token['lemma'] == '私-代名詞':
-				prime = '我'
 
 			if (token['lemma'] == '君' or token['lemma'] == '貴方' or token['lemma'] == 'お前'):
 				prime = '你'
@@ -82,6 +80,9 @@ if __name__ == "__main__":
 			compound_matched = re.match("([^-]+)-([^-]+)", token['lemma'])
 			if compound_matched:
 				prime = compound_matched.group(1)
+
+			if token['lemma'] == '私-代名詞':
+				prime = '我'
 
 			if len(token["features"]) != 0:
 				if "連体形-一般" in token['features']:
